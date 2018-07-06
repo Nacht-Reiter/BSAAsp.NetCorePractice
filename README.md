@@ -1,1 +1,1 @@
-﻿# BSALinqPractice
+﻿# BSAAsp.NetCorePractice
