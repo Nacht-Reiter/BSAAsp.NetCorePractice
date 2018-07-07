@@ -13,6 +13,16 @@ public class Queries
             Data = dataGiver;
         }
 
+        public int GetMaxUserId()
+        {
+            return Data.Users.Max(u => u.Id);
+        }
+
+        public int GetMaxPostId()
+        {
+            return Data.Users.SelectMany(u => u.Posts).Max(p => p.Id);
+        }
+
         public IEnumerable<(Post, int)> CountCommentsUnderPosts(int userId)//1 required query
         {
             if(Data.Users.Select(u => u.Id).Contains(userId))
