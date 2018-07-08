@@ -1,0 +1,71 @@
+﻿@model BSAAsp.NetCorePractice.Post
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            <a asp-controller="User" asp-action="Details" asp-route-id=@($"{Model.UserId}")>@Model.UserId</a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Likes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Likes)
+        </dd>
+        <dt>
+            <a href=@($"#Coments") data-toggle="collapse" class="text-info">@Html.DisplayNameFor(model => model.Comments)</a>
+        </dt>
+        <dd>
+            <div id=@($"Coments") class="collapse">
+                @{
+                    if (Model.Comments.Count() != 0)
+                    {
+                        @foreach (var c in Model.Comments)
+                        {
+                            <a class="col-xs-12 no-spacing" asp-controller="Comment" asp-action="Details" asp-route-id=@($"{c.Id}")>Id: @Html.DisplayFor(modelItem => c.Id)</a>
+                        }
+                    }
+                    else
+                    {
+                        <p>-</p>
+                    }
+                }
+            </div>
+        </dd>
+    </dl>
+</div>
+

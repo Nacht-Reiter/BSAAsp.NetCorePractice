@@ -1,0 +1,80 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<br />
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#posts">Posts</a></li>
+    <li><a data-toggle="tab" href="#todoes">Todoes</a></li>
+</ul>
+<br />
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="posts">
+
+        @foreach (var post in Model.SelectMany(u => u.Posts))
+        {
+            <div class="post panel panel-default container">
+                <div class="PostHeader panel-heading row">
+                    <a asp-route-id=@post.UserId asp-action="Details" asp-controller="User" class="col-sm-1 no-spacing"><img class="img-circle logo" alt="Card image" src=@Model.FirstOrDefault(u => u.Id == post.UserId).Avatar></a>
+                    <a asp-route-id=@post.UserId asp-action="Details" asp-controller="User" class="col-sm-6 no-spacing"><h4>@Model.FirstOrDefault(u => u.Id == post.UserId).Name</h4></a>
+                    <span class="col-sm-5 text-right no-right-spacing">@post.CreatedAt</span>
+                </div>
+                <div class="PostContent panel-body row">
+                    <a asp-action="Details" asp-controller="Post" asp-route-id=@post.Id><h2>@post.Title</h2></a>
+                    <p>@post.Body</p>
+                </div>
+                <div class="PostFooter panel-footer row">
+                    <h4 class="col-xs-6">Comments:</h4>
+                    <h4 class=" text-right"> <span class="glyphicon glyphicon-thumbs-up"></span> @post.Likes</h4>
+                    <div class="comments">
+                        @foreach (var c in post.Comments)
+                        {
+                            <div class="well-sm btn-default spacing row">
+                                <a asp-route-id=@c.UserId asp-action="Details" asp-controller="User" class="col-xs-1 hidden-xs"><img class="img-circle logo" alt="Card image" src=@Model.FirstOrDefault(u => u.Id == c.UserId).Avatar></a>
+                                <div class="col-xs-11">
+                                    <a asp-route-id=@c.UserId asp-action="Details" asp-controller="User" class="col-xs-3 no-spacing"><h5><strong>@Model.FirstOrDefault(u => u.Id == c.UserId).Name</strong></h5></a>
+                                    <h4 class="col-xs-9 text-right no-right-spacing"> <span class="glyphicon glyphicon-thumbs-up"></span> @c.Likes</h4>
+                                    <p class="col-xs-12 no-spacing">@c.Body</p>
+                                    <span class="col-xs-12 text-right no-right-spacing">@c.CreatedAt</span>
+                                    <hr />
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <div class="tab-pane fade" id="todoes">
+        @foreach (var todo in Model.SelectMany(u => u.Todoes))
+        {
+            <div class="todo panel panel-default container">
+                <div class="TodoHeader  panel-heading row">
+                    <a asp-route-id=@todo.UserId asp-action="Details" asp-controller="User" class="col-sm-1 no-spacing"><img class="img-circle logo" alt="Card image" src=@Model.FirstOrDefault(u => u.Id == todo.UserId).Avatar></a>
+                    <a asp-route-id=@todo.UserId asp-action="Details" asp-controller="User" class="col-sm-6 no-spacing"><h4>@Model.FirstOrDefault(u => u.Id == todo.UserId).Name</h4></a>
+                    <span class="col-sm-5 text-right no-right-spacing">@todo.CreatedAt</span>
+                </div>
+                <div class="TodoContent  panel-body row">
+                    @{
+                        if (todo.IsComplete)
+                        {
+                            <h3 class="glyphicon glyphicon-ok col-xs-1 text-center no-spacing"></h3>
+                        }
+                        else
+                        {
+                            <h3 class="glyphicon glyphicon-remove col-xs-1 text-center no-spacing"></h3>
+                        }
+                    }
+                    <a asp-action="Details" asp-controller="Todo" asp-route-id=@todo.Id class="col-xs-11 no-spacing"><h3>@todo.Name</h3></a>
+
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+

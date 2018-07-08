@@ -1,0 +1,87 @@
+﻿@model BSAAsp.NetCorePractice.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+
+    <h4 class="card-title">@Model.Name</h4>
+    <hr />
+
+    
+    <div class="well row ">
+        <img class="img-circle col-md-2" src=@Model.Avatar alt="Card image" />
+        <dl class="dl-horizontal col-md-10 ">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                <a href=@($"#Posts") data-toggle="collapse" class="text-info">@Html.DisplayNameFor(model => model.Posts)</a>
+            </dt>
+            <dd>
+                <div id=@($"Posts") class="collapse">
+                    @{
+                        if (Model.Posts.Count() != 0)
+                        {
+                            @foreach (var p in Model.Posts)
+                            {
+                                <a class="col-xs-12 no-spacing" asp-controller="Post" asp-action="Details" asp-route-id=@($"{p.Id}")>Id: @Html.DisplayFor(modelItem => p.Id)</a>
+                            }
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    }
+
+                </div>
+            </dd>
+            <dt>
+                <a href=@($"#Todoes") data-toggle="collapse"  class="text-info">@Html.DisplayNameFor(model => model.Todoes)</a>
+            </dt>
+            <dd>
+                <div id=@($"Todoes") class="collapse">
+                    @{
+                        if (Model.Todoes.Count() != 0)
+                        {
+                            @foreach (var t in Model.Todoes)
+                            {
+                                <a class="col-xs-12 no-spacing" asp-controller="Todo" asp-action="Details" asp-route-id=@($"{t.Id}")>Id: @Html.DisplayFor(modelItem => t.Id)</a>
+                            }
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    }
+
+                </div>
+            </dd>
+        </dl>
+    </div>
+</div>
+

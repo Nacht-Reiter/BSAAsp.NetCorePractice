@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BSAAsp.NetCorePractice.Comment>
+
+@{
+    ViewData["Title"] = "Short coments";
+}
+
+<h2>Short coments under all user`s posts</h2>
+<h4>(2 required query)</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Likes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Comment" asp-action="Details" asp-route-id=@($"{item.Id}")>@Html.DisplayFor(modelItem => item.Id)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    <a asp-controller="User" asp-action="Details" asp-route-id=@($"{item.UserId}")>@Html.DisplayFor(modelItem => item.UserId)</a>
+                </td>
+                <td>
+                    <a asp-controller="Post" asp-action="Details" asp-route-id=@($"{item.PostId}")>@Html.DisplayFor(modelItem => item.PostId)</a>
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Likes)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-default" asp-action="GetShortCommentsUnderPosts">Back</a>
+</div>
+

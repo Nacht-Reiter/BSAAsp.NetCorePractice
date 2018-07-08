@@ -1,0 +1,98 @@
+﻿@model IEnumerable<(Post, int)>
+@{
+    ViewData["Title"] = "Comments Under Posts";
+}
+
+<h2>Amount of coments under user`s posts</h2>
+<h4>(1 required query)</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Post</p>
+            </th>
+            <th>
+                <p>Comments Amount</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href=@($"#PostInfo{item.Item1.Id}") data-toggle="collapse">@Html.DisplayFor(modelItem => item.Item1.Title)</a>
+                    <div class="collapse" id=@($"PostInfo{item.Item1.Id}")>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Item1.Id)
+                            </dt>
+                            <dd>
+                                <a asp-controller="Post" asp-action="Details" asp-route-id=@($"{item.Item1.Id}")>@Html.DisplayFor(modelItem => item.Item1.Id)</a>
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Item1.CreatedAt)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Item1.CreatedAt)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Item1.Title)
+                            </dt>
+                            <dd>
+                                <a asp-controller="Post" asp-action="Details" asp-route-id=@($"{item.Item1.Id}")>@Html.DisplayFor(modelItem => item.Item1.Title)</a>
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Item1.Body)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Item1.Body)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Item1.UserId)
+                            </dt>
+                            <dd>
+                                <a asp-controller="User" asp-action="Details" asp-route-id=@($"{item.Item1.UserId}")>@Html.DisplayFor(modelItem => item.Item1.UserId)</a>
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Item1.Likes)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Item1.Likes)
+                            </dd>
+                            <dt>
+                                <a href=@($"#Coments{item.Item1.Id}") data-toggle="collapse"  class="text-info">@Html.DisplayNameFor(modelItem => item.Item1.Comments)</a>
+                            </dt>
+                            <dd>
+                                <div id=@($"Coments{item.Item1.Id}") class="collapse">
+                                    @{
+                                        if (item.Item1.Comments.Count() != 0)
+                                        {
+                                            @foreach (var c in item.Item1.Comments)
+                                            {
+                                                <a class="col-xs-12 no-spacing" asp-controller="Comment" asp-action="Details" asp-route-id=@($"{c.Id}")>Id: @Html.DisplayFor(modelItem => c.Id)</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p>-</p>
+                                        }
+                                    }
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item2)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-default" asp-action="CountCommentsUnderPosts">Back</a>
+</div>
+

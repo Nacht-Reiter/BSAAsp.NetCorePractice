@@ -1,0 +1,198 @@
+﻿@model ValueTuple<Post, Comment, Comment, int>
+
+@{
+    ViewData["Title"] = "Post info";
+}
+
+<h2>Post info</h2>
+<h4>(6 required query)</h4>
+
+<div id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>
+                <a data-toggle="collapse" href="#Post">
+                    Post
+                </a>
+            </h4>
+        </div>
+
+        <div id="Post" class="collapse panel-body" data-parent="#accordion">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Id)
+                </dt>
+                <dd>
+                    <a asp-action="Details" asp-controller="Post" asp-route-id="@Model.Item1?.Id">@Html.DisplayFor(model => model.Item1.Id)</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.CreatedAt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.CreatedAt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Body)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Body)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.UserId)
+                </dt>
+                <dd>
+                    <a asp-controller="User" asp-action="Details" asp-route-id=@($"{Model.Item1?.UserId}")>@Model.Item1?.UserId</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Likes)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Likes)
+                </dd>
+                <dt>
+                    <a href=@($"#Coments") data-toggle="collapse" class="text-info">@Html.DisplayNameFor(model => model.Item1.Comments)</a>
+                </dt>
+                <dd>
+                    <div id=@($"Coments") class="collapse">
+                        @{
+                            if (Model.Item1?.Comments.Count() != 0)
+                            {
+                                @foreach (var c in Model.Item1?.Comments)
+                                {
+                                    <a class="col-xs-12 no-spacing" asp-controller="Comment" asp-action="Details" asp-route-id=@($"{c.Id}")>Id: @Html.DisplayFor(modelItem => c.Id)</a>
+                                }
+                            }
+                            else
+                            {
+                                <p>-</p>
+                            }
+                        }
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>
+                <a data-toggle="collapse" href="#LongestComment">
+                    Longest Comment
+                </a>
+            </h4>
+        </div>
+
+        <div id="LongestComment" class="collapse panel-body" data-parent="#accordion">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item2.Id)
+                </dt>
+                <dd>
+                    <a asp-action="Details" asp-controller="Comment" asp-route-id="@Model.Item2?.Id">@Html.DisplayFor(model => model.Item2.Id)</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item2.CreatedAt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item2.CreatedAt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item2.Body)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item2.Body)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item2.UserId)
+                </dt>
+                <dd>
+                    <a asp-controller="User" asp-action="Details" asp-route-id=@($"{Model.Item2?.UserId}")>@Model.Item2?.UserId</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item2.PostId)
+                </dt>
+                <dd>
+                    <a asp-controller="Post" asp-action="Details" asp-route-id=@($"{Model.Item2?.PostId}")>@Model.Item2?.PostId</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item2.Likes)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item2.Likes)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>
+                <a data-toggle="collapse" href="#BestComment">
+                    The Best Comment
+                </a>
+            </h4>
+        </div>
+
+        <div id="BestComment" class="collapse panel-body" data-parent="#accordion">
+           
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item3.Id)
+                </dt>
+                <dd>
+                    <a asp-action="Details" asp-controller="Comment" asp-route-id="@Model.Item3?.Id">@Html.DisplayFor(model => model.Item3.Id)</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item3.CreatedAt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item3.CreatedAt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item3.Body)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item3.Body)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item3.UserId)
+                </dt>
+                <dd>
+                    <a asp-controller="User" asp-action="Details" asp-route-id=@($"{Model.Item3?.UserId}")>@Model.Item3?.UserId</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item3.PostId)
+                </dt>
+                <dd>
+                    <a asp-controller="Post" asp-action="Details" asp-route-id=@($"{Model.Item3?.PostId}")>@Model.Item3?.PostId</a>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item3.Likes)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Item3.Likes)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>
+                <a data-toggle="collapse" href="#TrashComents">
+                    Trash Coments Amount
+                </a>
+            </h4>
+        </div>
+
+        <div id="TrashComents" class="collapse panel-body" data-parent="#accordion">
+            <div>
+                <p>@Model.Item4</p>
+            </div>
+        </div>
+    </div>
+</div>
+
