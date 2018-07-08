@@ -30,16 +30,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Queries <span class="glyphicon glyphicon-menu-down"/></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-item btn-default col-lg-1"><a class="btn-default" asp-controller="Queries" asp-action="CountCommentsUnderPosts">Amount of coments under user`s posts</a></div>
-                            <div class="dropdown-item btn-default col-lg-1"><a class="btn-default" asp-controller="Queries" asp-action="GetShortCommentsUnderPosts">Short coments under all user`s posts</a></div>
-                            <div class="dropdown-item btn-default col-lg-1"><a class="btn-default" asp-controller="Queries" asp-action="GetCompleteTodoes">User`s completed todoes</a></div>
-                            <div class="dropdown-item btn-default col-lg-1"><a class="btn-default" asp-controller="Queries" asp-action="GetSortedUsers">Sorted Users with sorted todoes</a></div>
-                            <div class="dropdown-item btn-default col-lg-1"><a class="btn-default" asp-controller="Queries" asp-action="GetUserInfo">User`s info</a></div>
-                            <div class="dropdown-item btn-default col-lg-1"><a class="btn-default" asp-controller="Queries" asp-action="GetPostInfo">Post info</a></div>
+                            <div class="dropdown-item btn-default col-lg-12"><a asp-controller="Queries" asp-action="CountCommentsUnderPosts">Amount of coments under user`s posts</a></div>
+                            <div class="dropdown-item btn-default col-lg-12"><a asp-controller="Queries" asp-action="GetShortCommentsUnderPosts">Short coments under all user`s posts</a></div>
+                            <div class="dropdown-item btn-default col-lg-12"><a asp-controller="Queries" asp-action="GetCompleteTodoes">User`s completed todoes</a></div>
+                            <div class="dropdown-item btn-default col-lg-12"><a asp-controller="Queries" asp-action="GetSortedUsers">Sorted Users with sorted todoes</a></div>
+                            <div class="dropdown-item btn-default col-lg-12"><a asp-controller="Queries" asp-action="GetUserInfo">User`s info</a></div>
+                            <div class="dropdown-item btn-default col-lg-12"><a asp-controller="Queries" asp-action="GetPostInfo">Post info</a></div>
                         </div>
                     </li>
                 </ul>
@@ -48,8 +48,8 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        <hr  class="col-xs-12"/>
+        <footer class="col-xs-12">
             <p>&copy; 2018 - BSAAsp.NetCorePractice</p>
         </footer>
     </div>

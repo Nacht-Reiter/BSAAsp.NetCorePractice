@@ -1,0 +1,96 @@
+﻿@model IEnumerable<BSAAsp.NetCorePractice.User>
+
+@{
+    ViewData["Title"] = "Sorted Users";
+}
+
+<h2>Sorted Users with sorted todoes</h2>
+<h4>(4 required query)</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Avatar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Todoes)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-controller="User" asp-route-id="@item.Id"> <img class="img-circle img-responsive" src=@item.Avatar /></a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-controller="User" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-controller="User" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Id)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <div  class="collapse @($"User{item.Id}") ">
+                    @{
+                        if (item.Posts.Count() != 0)
+                        {
+                            @foreach (var p in item.Posts)
+                            {
+                                <a class="col-xs-12 no-spacing" asp-controller="Post" asp-action="Details" asp-route-id=@($"{p.Id}")>Id: @Html.DisplayFor(modelItem => p.Id)</a>
+                            }
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    }
+                </div>
+            </td>
+            <td>
+                <div  class="collapse @($"User{item.Id}")">
+                    @{
+                        if (item.Todoes.Count() != 0)
+                        {
+                            @foreach (var t in item.Todoes)
+                            {
+                                <a class="col-xs-12 no-spacing" asp-controller="Todo" asp-action="Details" asp-route-id=@($"{t.Id}")>Id: @Html.DisplayFor(modelItem => t.Id)</a>
+                            }
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    }
+                </div>
+            </td>
+            <td>
+                <a href=@($".User{item.Id}") data-toggle="collapse" class="btn btn-default">Show</a>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

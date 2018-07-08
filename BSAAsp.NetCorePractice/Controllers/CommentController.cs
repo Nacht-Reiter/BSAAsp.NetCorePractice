@@ -9,10 +9,17 @@ namespace BSAAsp.NetCorePractice.Controllers
 {
     public class CommentController : Controller
     {
+        DataGiver Data;
+
+        public CommentController(DataGiver data)
+        {
+            Data = data;
+        }
+
         // GET: Comment/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(Data.GetComments().FirstOrDefault(c => c.Id == id));
         }
 
     }

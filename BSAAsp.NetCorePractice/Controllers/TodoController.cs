@@ -9,10 +9,17 @@ namespace BSAAsp.NetCorePractice.Controllers
 {
     public class TodoController : Controller
     {
+        DataGiver Data;
+
+        public TodoController(DataGiver data)
+        {
+            Data = data;
+        }
+
         // GET: Todo/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(Data.GetTodoes().FirstOrDefault(t => t.Id == id));
         }
 
     }

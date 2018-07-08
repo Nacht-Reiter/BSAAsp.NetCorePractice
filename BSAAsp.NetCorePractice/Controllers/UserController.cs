@@ -9,10 +9,17 @@ namespace BSAAsp.NetCorePractice.Controllers
 {
     public class UserController : Controller
     {
+        DataGiver Data;
+
+        public UserController(DataGiver data)
+        {
+            Data = data;
+        }
+
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(Data.Users.FirstOrDefault(u => u.Id == id));
         }
     }
 }

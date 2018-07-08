@@ -11,7 +11,7 @@ namespace BSAAsp.NetCorePractice
     {
         [Required, Display(Name = "User`s ID"), Range(1, int.MaxValue, ErrorMessage ="User`s Id must be > 0")]
         public int Id { get; set; }
-        [Display(Name = "Created at")]
+        [Display(Name = "Registrated at")]
         public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
         public string Avatar { get; set; }

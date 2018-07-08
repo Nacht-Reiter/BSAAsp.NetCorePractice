@@ -68,7 +68,7 @@ namespace BSAAsp.NetCorePractice
             });
         }
 
-        private IEnumerable<Post> GetPosts()
+        public IEnumerable<Post> GetPosts()
         {
             IEnumerable<Post> posts = JsonConvert.DeserializeObject<IEnumerable<Post>>(RowPosts);
             return posts.GroupJoin(GetComments(), p => p.Id, c => c.PostId,
@@ -84,12 +84,12 @@ namespace BSAAsp.NetCorePractice
             });
         }
 
-        private IEnumerable<Comment> GetComments()
+        public IEnumerable<Comment> GetComments()
         {
             return JsonConvert.DeserializeObject<IEnumerable<Comment>>(RowComments);
         }
 
-        private IEnumerable<Todo> GetTodoes()
+        public IEnumerable<Todo> GetTodoes()
         {
             return JsonConvert.DeserializeObject<IEnumerable<Todo>>(RowTodoes);
         }

@@ -9,10 +9,17 @@ namespace BSAAsp.NetCorePractice.Controllers
 {
     public class PostController : Controller
     {
+        DataGiver Data;
+
+        public PostController(DataGiver data)
+        {
+            Data = data;
+        }
+
         // GET: Post/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(Data.GetPosts().FirstOrDefault(p => p.Id == id));
         }
     }
 }

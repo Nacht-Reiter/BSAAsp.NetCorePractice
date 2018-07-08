@@ -10,23 +10,18 @@ namespace BSAAsp.NetCorePractice.Controllers
 {
     public class HomeController : Controller
     {
+        DataGiver Data;
+
+        public HomeController(DataGiver data)
+        {
+            Data = data;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(Data.Users);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
 
         public IActionResult Error()
         {

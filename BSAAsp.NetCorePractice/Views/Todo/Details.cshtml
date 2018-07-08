@@ -38,11 +38,7 @@
             @Html.DisplayNameFor(model => model.UserId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserId)
+            <a asp-controller="User" asp-action="Details" asp-route-id=@($"{Model.UserId}")>@Model.UserId</a>
         </dd>
     </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
 </div>
